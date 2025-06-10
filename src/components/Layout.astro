@@ -85,6 +85,7 @@ const { title, description, showSidebar = true } = Astro.props;
 
   .sidebar {
     order: -1;
+    padding-top: calc(var(--grid-unit) * 3);
   }
 
   @media (min-width: 1024px) {
@@ -94,6 +95,7 @@ const { title, description, showSidebar = true } = Astro.props;
     
     .sidebar {
       order: 0;
+      padding-top: calc(var(--grid-unit) * 3);
     }
   }
 </style>
