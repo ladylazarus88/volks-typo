@@ -12,11 +12,18 @@ const categories = [...new Set(allPosts.flatMap(post => post.frontmatter.categor
 <div class="sidebar-content">
   <!-- Bio Section -->
   <section class="bio-section">
-    {config.author.avatar && (
-      <div class="avatar-container">
+    <div class="avatar-container">
+      {config.author.avatar ? (
         <img src={config.author.avatar} alt={config.author.name} class="avatar" />
-      </div>
-    )}
+      ) : (
+        <div class="avatar-placeholder">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      )}
+    </div>
     <h3 class="author-name">{config.author.name}</h3>
     <p class="bio-text">{config.author.bio}</p>
   </section>
@@ -88,6 +95,18 @@ const categories = [...new Set(allPosts.flatMap(post => post.frontmatter.categor
     border-radius: 50%;
     border: 2px solid var(--color-border);
     object-fit: cover;
+  }
+
+  .avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    background-color: var(--color-light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-medium-gray);
   }
 
   .author-name {

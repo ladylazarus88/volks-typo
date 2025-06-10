@@ -21,8 +21,7 @@ export const config: SiteConfig = {
   description: "A blog exploring the intersection of design, typography, and history",
   author: {
     name: "Your Name",
-    bio: "Writer, designer, and explorer of aesthetic tensions between past and present.",
-    avatar: "/avatar.jpg"
+    bio: "Writer, designer, and explorer of aesthetic tensions between past and present."
   },
   social: {
     github: "https://github.com/yourusername",
