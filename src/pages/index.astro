@@ -4,7 +4,7 @@ import { config } from '../config';
 
 const base = import.meta.env.BASE_URL;
 
-const recentPosts = await Astro.glob('./blog/*.md');
+const recentPosts = await Astro.glob('../content/blog/*.md');
 const sortedPosts = recentPosts
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
   .slice(0, 3);
@@ -43,7 +43,7 @@ const sortedPosts = recentPosts
             {sortedPosts.map(post => (
               <article class="demo-post-card">
                 <h3 class="demo-post-title">
-                  <a href={base + post.url}>{post.frontmatter.title}</a>
+                  <a href={`${base}/blog/${post.file.split('/').pop()?.replace('.md', '')}`}>{post.frontmatter.title}</a>
                 </h3>
                 
                 <time class="demo-post-date" datetime={post.frontmatter.date}>

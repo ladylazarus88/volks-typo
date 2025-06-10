@@ -3,7 +3,7 @@ import Layout from '../components/Layout.astro';
 
 const base = import.meta.env.BASE_URL;
 
-const allPosts = await Astro.glob('./blog/*.md');
+const allPosts = await Astro.glob('../content/blog/*.md');
 const sortedPosts = allPosts
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
 ---
@@ -23,7 +23,7 @@ const sortedPosts = allPosts
         {sortedPosts.map(post => (
           <article class="post-item">
             <h2 class="post-title">
-              <a href={base + post.url}>{post.frontmatter.title}</a>
+              <a href={`${base}/blog/${post.file.split('/').pop()?.replace('.md', '')}`}>{post.frontmatter.title}</a>
             </h2>
             
             <div class="post-meta">
@@ -48,7 +48,7 @@ const sortedPosts = allPosts
               <p class="post-excerpt">{post.frontmatter.excerpt}</p>
             )}
             
-            <a href={base + post.url} class="read-more">Read More →</a>
+            <a href={`${base}/blog/${post.file.split('/').pop()?.replace('.md', '')}`} class="read-more">Read More →</a>
           </article>
         ))}
       </div>
