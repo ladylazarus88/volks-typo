@@ -31,3 +31,6 @@ export const config: SiteConfig = {
   },
   siteUrl: "https://volks-typo.example.com"
 };
+
+export const SITE_TITLE = config.title;
+export const SITE_DESCRIPTION = config.description;
