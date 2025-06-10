@@ -4,7 +4,7 @@ A distinctive Astro blog theme that explores the aesthetic tension between Bauha
 
 ## 🚀 Demo
 
-[View Live Demo](https://volks-typo.netlify.app) <!-- Replace with your actual demo URL -->
+[View Live Demo](https://jdrhyne.github.io/volks-typo)
 
 ![Volks-Typo Theme Preview](public/preview.png) <!-- Add screenshot later -->
 
@@ -40,7 +40,7 @@ The result is a blog theme that feels both timeless and provocative, perfect for
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/volks-typo.git
+git clone https://github.com/jdrhyne/volks-typo.git
 cd volks-typo
 ```
 
@@ -62,13 +62,13 @@ You can also use this theme as a template for your own blog:
 
 ```bash
 # Using npm
-npm create astro@latest -- --template yourusername/volks-typo
+npm create astro@latest -- --template jdrhyne/volks-typo
 
 # Using yarn
-yarn create astro --template yourusername/volks-typo
+yarn create astro --template jdrhyne/volks-typo
 
 # Using pnpm
-pnpm create astro -- --template yourusername/volks-typo
+pnpm create astro -- --template jdrhyne/volks-typo
 ```
 
 ## 🛠️ Configuration
@@ -94,7 +94,7 @@ export const LOGO_IMAGE = {
 export const SOCIALS = [
   {
     name: "Github",
-    href: "https://github.com/yourusername",
+    href: "https://github.com/jdrhyne",
     linkTitle: `Follow on Github`,
     active: true,
   },
@@ -130,7 +130,7 @@ Blog posts are stored in `src/content/blog/`. Create a new `.md` file:
 title: "Your Post Title"
 description: "A brief description of your post"
 pubDate: 2024-01-15
-author: "Your Name"
+author: "Jonathan D. Rhyne"
 categories: ["Design", "Typography"]
 image:
   url: "/path/to/image.jpg"
@@ -215,7 +215,7 @@ vercel
 1. Update `astro.config.mjs` with your repository name:
 ```javascript
 export default defineConfig({
-  site: 'https://yourusername.github.io',
+  site: 'https://jdrhyne.github.io',
   base: '/volks-typo',
 })
 ```
@@ -241,13 +241,14 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Inspired by the Bauhaus design movement and modernist typography
 - Built with [Astro](https://astro.build)
 - Typography from [Fontsource](https://fontsource.org/)
+- Development assistance from [Claude Code](https://claude.ai/code) by Anthropic
 
 ## 📞 Support
 
-- Create an [issue](https://github.com/yourusername/volks-typo/issues) for bug reports
-- Start a [discussion](https://github.com/yourusername/volks-typo/discussions) for feature requests
-- Follow updates on [Twitter](https://twitter.com/yourusername)
+- Create an [issue](https://github.com/jdrhyne/volks-typo/issues) for bug reports
+- Start a [discussion](https://github.com/jdrhyne/volks-typo/discussions) for feature requests
+- Follow updates on [Twitter](https://twitter.com/jdrhyne)
 
 ---
 
-Made with ❤️ by [Your Name](https://github.com/yourusername)
+Made with ❤️ by [Jonathan D. Rhyne](https://github.com/jdrhyne)
