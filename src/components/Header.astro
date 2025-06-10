@@ -198,6 +198,8 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
     height: 48px;
     width: auto;
     max-width: 280px;
+    border: none !important; /* Override global img styles */
+    margin: 0 !important; /* Override global img styles */
   }
 
   .header-controls {
@@ -473,23 +475,23 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
       display: flex;
       justify-content: center;
       align-items: center;
+      text-align: center; /* Ensure text-align center */
     }
 
     .site-title a {
-      display: flex;
+      display: inline-flex; /* Changed from flex to inline-flex */
       justify-content: center;
       align-items: center;
-      width: 100%;
+      width: auto; /* Changed from 100% to auto */
     }
 
     .title-svg {
       display: block;
-      margin: 0 auto;
+      margin: 0 auto !important; /* Force center with important */
       height: 40px;
-      width: 100%;
+      width: auto; /* Changed from 100% to auto */
       max-width: 320px;
-      object-fit: contain;
-      object-position: center;
+      border: none !important; /* Override global img styles */
     }
 
     .nav-list {
