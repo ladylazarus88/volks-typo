@@ -487,9 +487,9 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
 
     .title-svg {
       display: block;
-      margin: 0 auto !important; /* Force center with important */
+      margin: 0 auto;
       height: 40px;
-      width: auto; /* Changed from 100% to auto */
+      width: 100%;
       max-width: 320px;
       border: none !important; /* Override global img styles */
     }
