@@ -247,8 +247,8 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
     background: var(--color-background);
     border: 2px solid var(--color-border);
     border-radius: 8px;
-    padding: calc(var(--grid-unit) * 2);
-    margin-bottom: calc(var(--grid-unit) * 3);
+    padding: calc(var(--grid-unit) * 3);
+    margin-bottom: calc(var(--grid-unit) * 5);
   }
 
   .search-input {
@@ -258,7 +258,7 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
     font-family: var(--font-body);
     font-size: 1.125rem;
     color: var(--color-text-primary);
-    padding: calc(var(--grid-unit)) calc(var(--grid-unit) * 1.5);
+    padding: calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 3);
     outline: none;
   }
 
@@ -298,7 +298,7 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
   }
 
   .search-results-header {
-    padding: calc(var(--grid-unit) * 2.5) calc(var(--grid-unit) * 3);
+    padding: calc(var(--grid-unit) * 4) calc(var(--grid-unit) * 6);
     border-bottom: 1px solid var(--color-border);
     background: var(--color-surface);
     position: sticky;
@@ -316,7 +316,8 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
   }
 
   .search-result {
-    padding: calc(var(--grid-unit) * 3) calc(var(--grid-unit) * 3);
+    padding: calc(var(--grid-unit) * 6) calc(var(--grid-unit) * 6);
+    margin-bottom: calc(var(--grid-unit) * 2);
     border-bottom: 1px solid var(--color-border);
     transition: background-color 0.2s ease;
   }
@@ -333,7 +334,7 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
     font-family: var(--font-heading-secondary);
     font-size: 1.25rem;
     font-weight: 700;
-    margin-bottom: calc(var(--grid-unit));
+    margin-bottom: calc(var(--grid-unit) * 3);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -355,26 +356,26 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
     text-transform: uppercase;
     letter-spacing: 0.05em;
     display: block;
-    margin-bottom: calc(var(--grid-unit) * 1.5);
+    margin-bottom: calc(var(--grid-unit) * 4);
   }
 
   .search-result-excerpt {
     color: var(--color-text-secondary);
-    line-height: 1.7;
-    margin-bottom: calc(var(--grid-unit) * 2);
+    line-height: 1.8;
+    margin-bottom: calc(var(--grid-unit) * 5);
   }
 
   .search-result-categories {
     display: flex;
     flex-wrap: wrap;
-    gap: calc(var(--grid-unit) * 1.5);
-    margin-top: calc(var(--grid-unit));
+    gap: calc(var(--grid-unit) * 2.5);
+    margin-top: calc(var(--grid-unit) * 3);
   }
 
   .search-category {
     background-color: #e8a100;
     color: var(--color-text-primary);
-    padding: calc(var(--grid-unit) / 2) calc(var(--grid-unit));
+    padding: calc(var(--grid-unit) * 1.5) calc(var(--grid-unit) * 2.5);
     font-size: 0.8rem;
     font-family: var(--font-mono);
     font-weight: 600;
@@ -390,7 +391,7 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
   }
 
   .search-no-results {
-    padding: calc(var(--grid-unit) * 6) calc(var(--grid-unit) * 3);
+    padding: calc(var(--grid-unit) * 10) calc(var(--grid-unit) * 6);
     text-align: center;
   }
 
@@ -453,15 +454,32 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
     }
 
     .search-result {
-      padding: calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 2);
+      padding: calc(var(--grid-unit) * 4) calc(var(--grid-unit) * 3);
+      margin-bottom: calc(var(--grid-unit) * 1.5);
     }
 
     .search-results-header {
-      padding: calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 2);
+      padding: calc(var(--grid-unit) * 3) calc(var(--grid-unit) * 3);
     }
     
     .search-result-categories {
-      gap: calc(var(--grid-unit));
+      gap: calc(var(--grid-unit) * 2);
+    }
+    
+    .search-category {
+      padding: calc(var(--grid-unit)) calc(var(--grid-unit) * 2);
+    }
+    
+    .search-result-title {
+      margin-bottom: calc(var(--grid-unit) * 2);
+    }
+    
+    .search-result-date {
+      margin-bottom: calc(var(--grid-unit) * 3);
+    }
+    
+    .search-result-excerpt {
+      margin-bottom: calc(var(--grid-unit) * 4);
     }
   }
 </style>
