@@ -25,7 +25,8 @@ export const config: SiteConfig = {
   },
   social: {
     github: "https://github.com/yourusername",
-    twitter: "https://twitter.com/yourusername", 
+    twitter: "https://twitter.com/yourusername",
+    linkedin: "https://linkedin.com/in/yourusername",
     email: "your.email@example.com"
   },
   siteUrl: "https://volks-typo.example.com"
