@@ -205,7 +205,6 @@ const base = import.meta.env.BASE_URL;
   .post-content :global(pre) {
     background-color: #000000;
     color: #ffffff;
-    border: 2px solid var(--color-accent);
     padding: calc(var(--grid-unit) * 3);
     margin: calc(var(--grid-unit) * 4) 0;
     border-radius: 8px;
@@ -221,6 +220,38 @@ const base = import.meta.env.BASE_URL;
     padding: 0;
     color: inherit;
     font-size: inherit;
+  }
+
+  /* Custom CSS syntax highlighting */
+  .post-content :global(pre) :is(
+    .hljs-selector-tag,
+    .hljs-selector-id,
+    .hljs-selector-class,
+    .hljs-tag,
+    .hljs-name
+  ) {
+    color: var(--color-accent) !important;
+  }
+
+  .post-content :global(pre) :is(
+    .hljs-punctuation,
+    .hljs-bracket,
+    .hljs-brace
+  ) {
+    color: #cccccc !important;
+  }
+
+  .post-content :global(pre) :is(
+    .hljs-string,
+    .hljs-literal,
+    .hljs-attr
+  ) {
+    color: #ffd700 !important;
+  }
+
+  /* Fallback for basic text highlighting */
+  .post-content :global(pre code) {
+    color: #ffffff;
   }
 
   .post-content :global(code) {
