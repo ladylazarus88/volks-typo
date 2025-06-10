@@ -475,8 +475,9 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
 
     .site-title {
       width: 100%;
-      /* Add consistent left padding that matches the visual start of nav text */
-      padding-left: var(--content-padding);
+      /* Center the SVG in the viewport */
+      text-align: center;
+      padding: 0 var(--content-padding);
     }
 
     .site-title a {
@@ -489,7 +490,7 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
       width: auto;
       max-width: 100%;
       border: none !important; /* Override global img styles */
-      margin: 0 !important;
+      margin: 0 auto !important; /* Center the SVG */
     }
     
     .header-controls {
