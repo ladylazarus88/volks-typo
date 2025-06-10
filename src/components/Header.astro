@@ -499,6 +499,13 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
       /* Add padding to align with site title */
       padding-left: var(--content-padding);
       padding-right: var(--content-padding);
+      gap: calc(var(--grid-unit) * 2); /* Ensure proper spacing between nav and search */
+    }
+    
+    .search-toggle {
+      /* Increase padding to prevent cutoff */
+      padding: calc(var(--grid-unit)) calc(var(--grid-unit) * 1.5);
+      margin-right: calc(var(--grid-unit) * -1); /* Compensate for extra padding */
     }
 
     .main-navigation {
