@@ -87,6 +87,8 @@ const categories = [...new Set(allPosts.flatMap(post => post.frontmatter.categor
 
   .avatar-container {
     margin-bottom: calc(var(--grid-unit) * 2);
+    display: flex;
+    justify-content: center;
   }
 
   .avatar {
