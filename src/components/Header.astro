@@ -17,12 +17,147 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
         <ul class="nav-list">
           <li><a href={base + "/"} class="nav-link">Home</a></li>
           <li><a href={base + "/blog"} class="nav-link">Blog</a></li>
+          <li><a href={base + "/categories"} class="nav-link">Categories</a></li>
           <li><a href={base + "/about"} class="nav-link">About</a></li>
-          <li><a href={base + "/contact"} class="nav-link">Contact</a></li>
         </ul>
       </nav>
+      
+      <button class="search-toggle" id="search-toggle" aria-label="Search articles">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+          <path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </button>
     </div>
   </div>
+</header>
+
+<div class="search-overlay" id="search-overlay">
+  <div class="search-container">
+    <div class="search-header">
+      <input type="text" class="search-input" id="search-input" placeholder="Search articles..." autocomplete="off">
+      <button class="search-close" id="search-close" aria-label="Close search">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2"/>
+          <line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </button>
+    </div>
+    <div class="search-results" id="search-results"></div>
+  </div>
+</div>
+
+<script>
+  // Search functionality
+  let searchData = [];
+  let searchOverlay, searchInput, searchResults;
+
+  async function initSearch() {
+    try {
+      const response = await fetch('/volks-typo/search.json');
+      searchData = await response.json();
+    } catch (error) {
+      console.error('Failed to load search data:', error);
+    }
+
+    searchOverlay = document.getElementById('search-overlay');
+    searchInput = document.getElementById('search-input');
+    searchResults = document.getElementById('search-results');
+
+    // Event listeners
+    document.getElementById('search-toggle').addEventListener('click', openSearch);
+    document.getElementById('search-close').addEventListener('click', closeSearch);
+    searchInput.addEventListener('input', handleSearch);
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && searchOverlay.classList.contains('active')) {
+        closeSearch();
+      }
+    });
+    
+    // Close on overlay click
+    searchOverlay.addEventListener('click', (e) => {
+      if (e.target === searchOverlay) {
+        closeSearch();
+      }
+    });
+  }
+
+  function openSearch() {
+    searchOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => searchInput.focus(), 100);
+  }
+
+  function closeSearch() {
+    searchOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+    searchInput.value = '';
+    searchResults.innerHTML = '';
+  }
+
+  function handleSearch(e) {
+    const query = e.target.value.toLowerCase().trim();
+    
+    if (query.length < 2) {
+      searchResults.innerHTML = '';
+      return;
+    }
+
+    const results = searchData.filter(post => 
+      post.title.toLowerCase().includes(query) ||
+      post.excerpt.toLowerCase().includes(query) ||
+      (post.categories && post.categories.some(cat => cat.toLowerCase().includes(query)))
+    ).slice(0, 10);
+
+    displayResults(results, query);
+  }
+
+  function displayResults(results, query) {
+    if (results.length === 0) {
+      searchResults.innerHTML = `
+        <div class="search-no-results">
+          <p>No articles found for "${query}"</p>
+        </div>
+      `;
+      return;
+    }
+
+    const resultsHTML = results.map(post => `
+      <article class="search-result">
+        <h3 class="search-result-title">
+          <a href="/volks-typo${post.url}">${post.title}</a>
+        </h3>
+        <time class="search-result-date">${new Date(post.date).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })}</time>
+        ${post.excerpt ? `<p class="search-result-excerpt">${post.excerpt}</p>` : ''}
+        ${post.categories ? `
+          <div class="search-result-categories">
+            ${post.categories.map(cat => `<span class="search-category">${cat}</span>`).join('')}
+          </div>
+        ` : ''}
+      </article>
+    `).join('');
+
+    searchResults.innerHTML = `
+      <div class="search-results-header">
+        <p>Found ${results.length} article${results.length === 1 ? '' : 's'} for "${query}"</p>
+      </div>
+      ${resultsHTML}
+    `;
+  }
+
+  // Initialize when DOM is loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSearch);
+  } else {
+    initSearch();
+  }
+</script>
 </header>
 
 <style>
@@ -62,6 +197,191 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
     align-items: center;
     gap: calc(var(--grid-unit) * 3);
     flex-shrink: 0;
+  }
+
+  .search-toggle {
+    background: none;
+    border: none;
+    color: var(--color-text-primary);
+    padding: calc(var(--grid-unit) / 2);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-toggle:hover,
+  .search-toggle:focus {
+    color: var(--color-accent);
+    outline: none;
+  }
+
+  .search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+
+  .search-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .search-container {
+    max-width: 800px;
+    margin: calc(var(--grid-unit) * 8) auto;
+    padding: 0 var(--content-padding);
+  }
+
+  .search-header {
+    display: flex;
+    align-items: center;
+    background: var(--color-background);
+    border: 2px solid var(--color-border);
+    border-radius: 8px;
+    padding: calc(var(--grid-unit));
+    margin-bottom: calc(var(--grid-unit) * 2);
+  }
+
+  .search-input {
+    flex: 1;
+    border: none;
+    background: none;
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-text-primary);
+    padding: calc(var(--grid-unit) / 2);
+    outline: none;
+  }
+
+  .search-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  .search-close {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    padding: calc(var(--grid-unit) / 2);
+    cursor: pointer;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-close:hover,
+  .search-close:focus {
+    color: var(--color-accent);
+    outline: none;
+  }
+
+  .search-results {
+    max-height: 60vh;
+    overflow-y: auto;
+    background: var(--color-background);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+  }
+
+  .search-results-header {
+    padding: calc(var(--grid-unit) * 2);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+  }
+
+  .search-results-header p {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .search-result {
+    padding: calc(var(--grid-unit) * 2);
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color 0.2s ease;
+  }
+
+  .search-result:hover {
+    background-color: var(--color-surface);
+  }
+
+  .search-result:last-child {
+    border-bottom: none;
+  }
+
+  .search-result-title {
+    font-family: var(--font-heading-secondary);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: calc(var(--grid-unit) / 2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .search-result-title a {
+    color: var(--color-text-primary);
+    text-decoration: none;
+  }
+
+  .search-result-title a:hover,
+  .search-result-title a:focus {
+    color: var(--color-accent);
+  }
+
+  .search-result-date {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: calc(var(--grid-unit));
+  }
+
+  .search-result-excerpt {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: calc(var(--grid-unit));
+  }
+
+  .search-result-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--grid-unit) / 2);
+  }
+
+  .search-category {
+    background-color: var(--color-text-primary);
+    color: white;
+    padding: calc(var(--grid-unit) / 4) calc(var(--grid-unit) / 2);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+  }
+
+  .search-no-results {
+    padding: calc(var(--grid-unit) * 4);
+    text-align: center;
+  }
+
+  .search-no-results p {
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin: 0;
   }
 
   .main-navigation {
