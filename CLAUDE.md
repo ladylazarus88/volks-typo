@@ -1,66 +1,86 @@
 # Volks-Typo Astro Theme
 
 ## Project Overview
-An Astro blog theme exploring the aesthetic tension between Bauhaus modernism and WW2-era monumental design. The theme creates a "dissonant harmony" that is visually striking, functional, and conceptually rich.
+A minimalist Astro blog theme with bold typography and a strong geometric design system. The theme emphasizes clarity, readability, and modern web aesthetics while maintaining a distinctive industrial character.
 
 ## Core Design Philosophy
-- **Form Follows Function (with a Twist)**: Bauhaus functionalism with monumental design counterpoints
-- **Minimalism as a Base**: Clean, uncluttered aesthetic with generous white space
-- **Constructivist Influence**: Strong grid system (8-point grid) for structural order
+- **Minimalist Foundation**: Clean, uncluttered aesthetic with generous white space
+- **Bold Typography**: Strong typographic hierarchy with uppercase headings
+- **Geometric Structure**: Consistent 8-point grid system for layout harmony
+- **High Contrast**: Clear visual separation between elements
 
 ## Color Palette
 
-### Primary Palette (Bauhaus)
-- `#f0e9d6` (Parchment White) - Backgrounds
-- `#2c2c2c` (Charcoal Black) - Body Text
-- `#c13127` (Muted Red) - Links, active states
-- `#005a8d` (Deep Blue) - Secondary accents, blockquotes
-- `#e8a100` (Ochre Yellow) - Tertiary accents (tags, categories)
+### Monotone Base
+- `#ffffff` (White) - Primary background
+- `#f5f5f5` (Light Gray) - Surface backgrounds (header, footer, sidebar)
+- `#888888` (Medium Gray) - Muted text, borders
+- `#333333` (Dark Gray) - Secondary text
+- `#000000` (Black) - Primary text
 
-### Secondary Palette (WW2-Era)
-- `#8b0000` (Blood Red) - Oversized headings, monumental rule
-- `#d4c8a0` (Stone Beige) - Header and footer backgrounds
-- `#3d3d3d` (Steel Gray) - Borders and dividers
+### Accent Color
+- `#dc2626` (Red) - Primary accent for headings, links, and interactive elements
+
+### Special Usage
+- `#e8a100` (Ochre Yellow) - Category tags in search results (interactive state)
+- `#c13127` (Dark Red) - Category tag hover state in search results
+- `#000000` (Black) - Code block backgrounds with syntax highlighting
 
 ## Typography
 
-### Headings (H1, H2, H3) - "Stripped Classicism"
-- **H1**: Cormorant Garamond
-- **H2, H3**: Playfair Display
-- **Styling**: All caps, letter-spacing: 0.1em, font-weight: 900, Blood Red color
+### Headings - Industrial Strength
+- **H1**: Oswald - 700 weight, uppercase, 0.15em letter-spacing
+- **H2**: Roboto Condensed - 700 weight, uppercase, 0.1em letter-spacing  
+- **H3**: Roboto Condensed - 600 weight, uppercase, 0.08em letter-spacing
+- **Color**: Red accent (#dc2626) for all headings
 
-### Body Text - "Bauhaus Purity"
-- **Font**: Inter
-- **Size**: 16-18px
+### Body Text - Clean & Readable
+- **Font**: Work Sans - 400 weight
+- **Size**: 18px (1.125rem)
 - **Line Height**: 1.6
-- **Color**: Charcoal Black
+- **Color**: Black (#000000)
 
 ### Monospace/Code
 - **Font**: JetBrains Mono
-- **Background**: Parchment White with borders
+- **Inline Code**: Light gray background with border
+- **Code Blocks**: Black background with custom syntax highlighting
 
-### Fraktur Accent
-- **Usage**: Main site title only (as SVG)
+### Site Title
+- **Implementation**: Custom SVG with Fraktur-style lettering
+- **Height**: 48px (desktop), 36px (mobile)
 
 ## Layout Architecture
 
 ### Responsive Design
-- Mobile/Tablet: Single column
-- Desktop (1024px+): Two-column with left sidebar
+- Mobile/Tablet: Single column with hamburger menu
+- Desktop (1024px+): Two-column with left sidebar (320px width)
 
 ### Core Components
-1. **Layout.astro** - Main wrapper with CSS grid
-2. **Header.astro** - Full-width with Stone Beige background
-3. **Sidebar.astro** - Bio, Recent Posts, Categories
-4. **Footer.astro** - Copyright and social links
-5. **[...slug].astro** - Blog post template with Blood Red rule
+1. **Layout.astro** - Main wrapper with CSS grid system
+2. **Header.astro** - Sticky header with navigation, search, and RSS
+3. **Sidebar.astro** - Author bio, recent posts, and categories
+4. **Footer.astro** - Social links and copyright
+5. **[...slug].astro** - Blog post template with thick red divider
+
+## Interactive Features
+
+### Search Functionality
+- Full-text search overlay
+- Real-time filtering of blog posts
+- Highlighted categories with interactive color states
+
+### Mobile Navigation
+- Hamburger menu with slide-in navigation
+- Separate mobile controls for RSS and search
+- Touch-optimized interface
 
 ## Technical Implementation
-- **Styling**: Astro Scoped CSS
-- **Colors**: CSS Variables in global stylesheet
+- **Styling**: Astro Scoped CSS with CSS Variables
+- **Colors**: CSS custom properties for theming
 - **Fonts**: Self-hosted via @fontsource
 - **Configuration**: Central src/config.ts file
 - **Social Links**: GitHub, X, Instagram, LinkedIn, Email
+- **Grid System**: 8-point grid unit for consistent spacing
 
 ## Development Commands
 ```bash
