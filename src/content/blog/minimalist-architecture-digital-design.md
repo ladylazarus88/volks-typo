@@ -15,7 +15,6 @@ Architecture and web design share a fundamental challenge: creating spaces that 
 
 ### Ludwig Mies van der Rohe (1886-1969)
 
-![Barcelona Pavilion - An open space with minimal walls and materials](placeholder-barcelona-pavilion.jpg)
 *The Barcelona Pavilion (1929) - Where walls dissolve into pure space*
 
 Mies gave us the phrase "Less is more" and demonstrated it through buildings that achieved maximum impact with minimal means. His design principles:
@@ -26,7 +25,6 @@ Mies gave us the phrase "Less is more" and demonstrated it through buildings tha
 
 ### Le Corbusier (1887-1965)
 
-![Villa Savoye - White geometric building elevated on pillars](placeholder-villa-savoye.jpg)
 *Villa Savoye (1931) - The house as "machine for living"*
 
 Le Corbusier's "Five Points of Architecture" translate directly to web design:
@@ -39,7 +37,6 @@ Le Corbusier's "Five Points of Architecture" translate directly to web design:
 
 ### Tadao Ando (1941-present)
 
-![Church of the Light - Concrete interior with cross-shaped light](placeholder-church-light.jpg)
 *Church of the Light (1989) - Drama through simplicity*
 
 Ando's work shows how minimalism can be emotional:
@@ -63,7 +60,6 @@ Just as architects use structural grids, digital designers employ grid systems:
 }
 ```
 
-![Modernist building facade showing clear grid structure](placeholder-grid-building.jpg)
 *Grid systems in architecture and web design create order and rhythm*
 
 ### 2. White Space as Material
@@ -77,7 +73,6 @@ In architecture, space itself is a material. In digital design, white space serv
 
 ### 3. Material Honesty
 
-![Concrete and glass building showing raw materials](placeholder-material-honesty.jpg)
 *Honest materials in architecture parallel authentic digital interfaces*
 
 Minimalist architects celebrated raw materials—concrete, steel, glass. In digital design, this translates to:
@@ -91,7 +86,6 @@ Minimalist architects celebrated raw materials—concrete, steel, glass. In digi
 
 ### The Farnsworth House by Mies van der Rohe
 
-![Glass house in nature showing complete transparency](placeholder-farnsworth-house.jpg)
 *Farnsworth House (1951) - Maximum transparency, minimum structure*
 
 **Architectural Features:**
@@ -108,7 +102,6 @@ Minimalist architects celebrated raw materials—concrete, steel, glass. In digi
 
 ### The Guggenheim Museum by Frank Lloyd Wright
 
-![Spiral interior of Guggenheim Museum](placeholder-guggenheim.jpg)
 *Guggenheim Museum (1959) - Continuous flow guides visitors*
 
 **Architectural Features:**
@@ -127,7 +120,6 @@ Minimalist architects celebrated raw materials—concrete, steel, glass. In digi
 
 ### Zen Principles in Architecture and Web
 
-![Traditional Japanese interior with minimal elements](placeholder-japanese-interior.jpg)
 *Japanese tea house - Maximum impact through minimum means*
 
 Japanese minimalism adds spiritual dimension:
@@ -151,7 +143,6 @@ Japanese minimalism adds spiritual dimension:
 
 ### Apple Park by Foster + Partners
 
-![Aerial view of circular Apple Park building](placeholder-apple-park.jpg)
 *Apple Park (2017) - Digital age architecture*
 
 Apple's headquarters embodies digital-physical fusion:
@@ -168,7 +159,6 @@ These principles appear in Apple's digital products:
 
 ### National Museum of Qatar by Jean Nouvel
 
-![Desert rose-inspired museum building](placeholder-qatar-museum.jpg)
 *National Museum of Qatar (2019) - Organic minimalism*
 
 Shows how minimalism can be:
@@ -194,7 +184,6 @@ Shows how minimalism can be:
 
 ### Content as Space
 
-![Website layout showing clear content hierarchy](placeholder-web-layout.jpg)
 *Content blocks creating spatial rhythm*
 
 Design content blocks like architectural spaces:
@@ -226,7 +215,6 @@ Just as modern buildings adapt to their environment:
 
 ### When Less Becomes Too Little
 
-![Stark, unwelcoming minimalist interior](placeholder-cold-minimalism.jpg)
 *Minimalism can become cold and unwelcoming*
 
 Common pitfalls:
@@ -247,7 +235,6 @@ Solutions from architecture:
 
 ### Sustainable Minimalism
 
-![Green building with minimal environmental impact](placeholder-sustainable-architecture.jpg)
 *Sustainable architecture leading digital sustainability*
 
 Architecture's sustainability focus influences web design:
