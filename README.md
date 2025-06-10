@@ -5,6 +5,8 @@
 [![Latest Release](https://img.shields.io/github/v/release/jdrhyne/volks-typo)](https://github.com/jdrhyne/volks-typo/releases)
 [![Changelog](https://img.shields.io/badge/changelog-📝-blue.svg)](CHANGELOG.md)
 
+![Volks-Typo 3D Showcase](screenshots/volks-typo-3d-showcase.png)
+
 A striking Astro blog theme that explores the aesthetic tension between Bauhaus modernism and WW2-era monumental design. Volks-Typo creates a "dissonant harmony" that is visually compelling, highly functional, and conceptually rich.
 
 ![Volks-Typo Featured](screenshots/volks-typo-featured-main.png)
