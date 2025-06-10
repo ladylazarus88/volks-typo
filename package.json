@@ -13,11 +13,11 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "astro": "^5.9.1",
-    "@fontsource/oswald": "^5.0.0",
-    "@fontsource/work-sans": "^5.0.0",
-    "@fontsource/roboto-condensed": "^5.0.0",
-    "@fontsource/jetbrains-mono": "^5.0.0"
+    "@fontsource/jetbrains-mono": "^5.0.0",
+    "@fontsource/oswald": "^5.2.6",
+    "@fontsource/roboto-condensed": "^5.2.6",
+    "@fontsource/work-sans": "^5.2.6",
+    "astro": "^5.9.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.3",
