@@ -5,4 +5,7 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://jdrhyne.github.io',
   base: '/volks-typo',
+  markdown: {
+    syntaxHighlight: 'prism',
+  },
 });

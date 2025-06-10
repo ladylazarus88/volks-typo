@@ -222,36 +222,46 @@ const base = import.meta.env.BASE_URL;
     font-size: inherit;
   }
 
-  /* Custom CSS syntax highlighting */
-  .post-content :global(pre) :is(
-    .hljs-selector-tag,
-    .hljs-selector-id,
-    .hljs-selector-class,
-    .hljs-tag,
-    .hljs-name
-  ) {
+  /* Custom Prism syntax highlighting for German flag colors */
+  .post-content :global(.token.selector),
+  .post-content :global(.token.tag),
+  .post-content :global(.token.property),
+  .post-content :global(.token.class-name),
+  .post-content :global(.token.function) {
     color: var(--color-accent) !important;
   }
 
-  .post-content :global(pre) :is(
-    .hljs-punctuation,
-    .hljs-bracket,
-    .hljs-brace
-  ) {
+  .post-content :global(.token.punctuation),
+  .post-content :global(.token.brace),
+  .post-content :global(.token.bracket) {
     color: #cccccc !important;
   }
 
-  .post-content :global(pre) :is(
-    .hljs-string,
-    .hljs-literal,
-    .hljs-attr
-  ) {
+  .post-content :global(.token.string),
+  .post-content :global(.token.attr-value),
+  .post-content :global(.token.url) {
     color: #ffd700 !important;
   }
 
-  /* Fallback for basic text highlighting */
-  .post-content :global(pre code) {
-    color: #ffffff;
+  .post-content :global(.token.comment) {
+    color: #888888 !important;
+    font-style: italic;
+  }
+
+  .post-content :global(.token.number),
+  .post-content :global(.token.boolean) {
+    color: #66d9ef !important;
+  }
+
+  /* Reset default Prism styles and apply our theme */
+  .post-content :global(pre[class*="language-"]) {
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  .post-content :global(code[class*="language-"]) {
+    background: #000000 !important;
+    color: #ffffff !important;
   }
 
   .post-content :global(code) {
