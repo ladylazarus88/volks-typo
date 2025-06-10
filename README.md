@@ -1,47 +1,253 @@
-# Astro Starter Kit: Minimal
+# Volks-Typo
 
-```sh
-npm create astro@latest -- --template minimal
+A distinctive Astro blog theme that explores the aesthetic tension between Bauhaus modernism and WW2-era monumental design. This theme creates a "dissonant harmony" that is visually striking, functional, and conceptually rich.
+
+## 🚀 Demo
+
+[View Live Demo](https://volks-typo.netlify.app) <!-- Replace with your actual demo URL -->
+
+![Volks-Typo Theme Preview](public/preview.png) <!-- Add screenshot later -->
+
+## ✨ Features
+
+- **Unique Aesthetic**: Combines Bauhaus functionalism with monumental design elements
+- **Responsive Layout**: Mobile-first design with elegant desktop two-column layout
+- **Search Functionality**: Built-in client-side search for blog posts
+- **Category System**: Organize content with tags and categories
+- **Typography Focus**: Carefully curated typefaces including Cormorant Garamond, Playfair Display, and Inter
+- **Markdown Support**: Write content in Markdown with full syntax highlighting
+- **SEO Optimized**: Built with performance and search engines in mind
+- **Social Links**: Configurable social media integration
+- **Dark Mode Ready**: CSS variables for easy theming (future enhancement)
+
+## 🎨 Design Philosophy
+
+This theme explores the intersection of two powerful design movements:
+
+- **Bauhaus Modernism**: Clean lines, functional layouts, and minimalist aesthetics
+- **Monumental Design**: Bold typography, dramatic scale, and commanding presence
+
+The result is a blog theme that feels both timeless and provocative, perfect for writers who want their content to make a statement.
+
+## 📦 Installation
+
+### Prerequisites
+
+- Node.js 18.14.1 or higher
+- npm or yarn
+
+### Quick Start
+
+1. Clone this repository:
+```bash
+git clone https://github.com/yourusername/volks-typo.git
+cd volks-typo
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/minimal)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/minimal/devcontainer.json)
+2. Install dependencies:
+```bash
+npm install
+```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+3. Start the development server:
+```bash
+npm run dev
+```
 
-## 🚀 Project Structure
+4. Open [http://localhost:3001](http://localhost:3001) in your browser
 
-Inside of your Astro project, you'll see the following folders and files:
+### Using as a Template
 
-```text
-/
+You can also use this theme as a template for your own blog:
+
+```bash
+# Using npm
+npm create astro@latest -- --template yourusername/volks-typo
+
+# Using yarn
+yarn create astro --template yourusername/volks-typo
+
+# Using pnpm
+pnpm create astro -- --template yourusername/volks-typo
+```
+
+## 🛠️ Configuration
+
+### Site Configuration
+
+Edit `src/config.ts` to customize your site:
+
+```typescript
+export const SITE = {
+  title: "Your Blog Title",
+  description: "Your blog description",
+  defaultLanguage: "en_US",
+};
+
+export const LOGO_IMAGE = {
+  enable: true,
+  svg: true,
+  width: 216,
+  height: 46,
+};
+
+export const SOCIALS = [
+  {
+    name: "Github",
+    href: "https://github.com/yourusername",
+    linkTitle: `Follow on Github`,
+    active: true,
+  },
+  // Add more social links...
+];
+```
+
+### Color Customization
+
+The theme uses CSS variables for easy color customization. Edit `src/styles/global.css`:
+
+```css
+:root {
+  --color-parchment: #f0e9d6;
+  --color-charcoal: #2c2c2c;
+  --color-muted-red: #c13127;
+  --color-deep-blue: #005a8d;
+  --color-ochre: #e8a100;
+  --color-blood-red: #8b0000;
+  --color-stone-beige: #d4c8a0;
+  --color-steel-gray: #3d3d3d;
+}
+```
+
+## 📝 Writing Content
+
+### Creating Blog Posts
+
+Blog posts are stored in `src/content/blog/`. Create a new `.md` file:
+
+```markdown
+---
+title: "Your Post Title"
+description: "A brief description of your post"
+pubDate: 2024-01-15
+author: "Your Name"
+categories: ["Design", "Typography"]
+image:
+  url: "/path/to/image.jpg"
+  alt: "Image description"
+---
+
+Your content here...
+```
+
+### Frontmatter Options
+
+- `title` (required): Post title
+- `description` (required): Brief description for SEO and previews
+- `pubDate` (required): Publication date
+- `author` (optional): Author name
+- `categories` (optional): Array of category names
+- `image` (optional): Featured image with URL and alt text
+- `draft` (optional): Set to `true` to hide from production
+
+## 🏗️ Project Structure
+
+```
+volks-typo/
 ├── public/
+│   ├── favicon.svg
+│   └── site-title.svg
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/
+│   │   ├── Footer.astro
+│   │   ├── Header.astro
+│   │   ├── Layout.astro
+│   │   └── Sidebar.astro
+│   ├── content/
+│   │   └── blog/
+│   │       └── *.md
+│   ├── pages/
+│   │   ├── index.astro
+│   │   ├── blog.astro
+│   │   ├── about.astro
+│   │   ├── categories.astro
+│   │   └── blog/[...slug].astro
+│   ├── styles/
+│   │   └── global.css
+│   └── config.ts
+├── astro.config.mjs
+├── package.json
+└── tsconfig.json
 ```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
 
 ## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
+| Command | Action |
+|---------|--------|
+| `npm install` | Install dependencies |
+| `npm run dev` | Start dev server at `localhost:3001` |
+| `npm run build` | Build production site to `./dist/` |
+| `npm run preview` | Preview build locally |
+| `npm run check` | Check TypeScript |
+| `npm run lint` | Run ESLint |
+| `npm run format` | Format with Prettier |
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 🚀 Deployment
 
-## 👀 Want to learn more?
+This theme can be deployed to any static hosting service:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Netlify
+
+1. Push your code to GitHub
+2. Import your repository in Netlify
+3. Build command: `npm run build`
+4. Publish directory: `dist`
+
+### Vercel
+
+```bash
+npm i -g vercel
+vercel
+```
+
+### GitHub Pages
+
+1. Update `astro.config.mjs` with your repository name:
+```javascript
+export default defineConfig({
+  site: 'https://yourusername.github.io',
+  base: '/volks-typo',
+})
+```
+
+2. Deploy using GitHub Actions (see `.github/workflows/deploy.yml`)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Inspired by the Bauhaus design movement and modernist typography
+- Built with [Astro](https://astro.build)
+- Typography from [Fontsource](https://fontsource.org/)
+
+## 📞 Support
+
+- Create an [issue](https://github.com/yourusername/volks-typo/issues) for bug reports
+- Start a [discussion](https://github.com/yourusername/volks-typo/discussions) for feature requests
+- Follow updates on [Twitter](https://twitter.com/yourusername)
+
+---
+
+Made with ❤️ by [Your Name](https://github.com/yourusername)

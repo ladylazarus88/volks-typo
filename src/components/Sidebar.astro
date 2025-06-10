@@ -1,7 +1,9 @@
 ---
 import { config } from '../config';
 
-const allPosts = await Astro.glob('../pages/blog/*.md');
+const base = import.meta.env.BASE_URL;
+
+const allPosts = await Astro.glob('../content/blog/*.md');
 const recentPosts = allPosts
   .sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime())
   .slice(0, 5);
@@ -12,11 +14,18 @@ const categories = [...new Set(allPosts.flatMap(post => post.frontmatter.categor
 <div class="sidebar-content">
   <!-- Bio Section -->
   <section class="bio-section">
-    {config.author.avatar && (
-      <div class="avatar-container">
+    <div class="avatar-container">
+      {config.author.avatar ? (
         <img src={config.author.avatar} alt={config.author.name} class="avatar" />
-      </div>
-    )}
+      ) : (
+        <div class="avatar-placeholder">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      )}
+    </div>
     <h3 class="author-name">{config.author.name}</h3>
     <p class="bio-text">{config.author.bio}</p>
   </section>
@@ -28,7 +37,7 @@ const categories = [...new Set(allPosts.flatMap(post => post.frontmatter.categor
       <ul class="post-list">
         {recentPosts.map(post => (
           <li class="post-item">
-            <a href={post.url} class="post-link">
+            <a href={`${base}/blog/${post.file.split('/').pop()?.replace('.md', '')}`} class="post-link">
               {post.frontmatter.title}
             </a>
             <time class="post-date" datetime={post.frontmatter.date}>
@@ -51,7 +60,7 @@ const categories = [...new Set(allPosts.flatMap(post => post.frontmatter.categor
       <ul class="category-list">
         {categories.map(category => (
           <li class="category-item">
-            <a href={`/categories/${category.toLowerCase()}`} class="category-link">
+            <a href={`${base}/categories/${category.toLowerCase()}`} class="category-link">
               {category}
             </a>
           </li>
@@ -80,6 +89,8 @@ const categories = [...new Set(allPosts.flatMap(post => post.frontmatter.categor
 
   .avatar-container {
     margin-bottom: calc(var(--grid-unit) * 2);
+    display: flex;
+    justify-content: center;
   }
 
   .avatar {
@@ -88,6 +99,18 @@ const categories = [...new Set(allPosts.flatMap(post => post.frontmatter.categor
     border-radius: 50%;
     border: 2px solid var(--color-border);
     object-fit: cover;
+  }
+
+  .avatar-placeholder {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    background-color: var(--color-light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-medium-gray);
   }
 
   .author-name {
@@ -119,14 +142,22 @@ const categories = [...new Set(allPosts.flatMap(post => post.frontmatter.categor
     padding-bottom: calc(var(--grid-unit) / 2);
   }
 
-  .post-list,
-  .category-list {
+  .post-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
     gap: calc(var(--grid-unit) * 1.5);
+  }
+
+  .category-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--grid-unit) / 2);
   }
 
   .post-item {
@@ -158,13 +189,13 @@ const categories = [...new Set(allPosts.flatMap(post => post.frontmatter.categor
 
   .category-link {
     display: inline-block;
-    padding: calc(var(--grid-unit) / 2) calc(var(--grid-unit));
+    padding: calc(var(--grid-unit) / 4) calc(var(--grid-unit) / 2);
     background-color: var(--color-text-primary);
     color: var(--color-background);
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
     border-radius: 3px;
     transition: background-color 0.2s ease;
   }

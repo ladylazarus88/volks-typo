@@ -22,3 +22,14 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# screenshots
+screenshots/
+
+# development scripts
+capture-*.js
+debug-*.js
+mobile-screenshot-*.js
+test-*.js
+cdp-*.js
+fix-*.js

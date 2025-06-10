@@ -47,7 +47,7 @@ h1 {
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #8b0000;
+  color: #dc2626;
 }
 ```
 
