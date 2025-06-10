@@ -19,26 +19,46 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
           <li><a href={base + "/blog"} class="nav-link">Blog</a></li>
           <li><a href={base + "/categories"} class="nav-link">Categories</a></li>
           <li><a href={base + "/about"} class="nav-link">About</a></li>
-          <li><a href={base + "/rss.xml"} class="nav-link rss-link" title="RSS Feed">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <circle cx="5" cy="15" r="2" fill="currentColor"/>
-              <path d="M3 3C9.627 3 15 8.373 15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              <path d="M3 8c4.418 0 8 3.582 8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <span class="visually-hidden">RSS</span>
-          </a></li>
         </ul>
       </nav>
       
-      <button class="search-toggle" id="search-toggle" aria-label="Search articles">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
-          <path d="m21 21-4.35-4.35" stroke="currentColor" stroke-width="2"/>
-        </svg>
-      </button>
+      <div class="mobile-controls">
+        <button class="hamburger-toggle" id="hamburger-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="hamburger-line" d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path class="hamburger-line" d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path class="hamburger-line" d="M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        
+        <button class="search-toggle" id="search-toggle" aria-label="Search articles">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+            <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+        
+        <a href={base + "/rss.xml"} class="rss-toggle" title="RSS Feed">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="5" cy="19" r="2" fill="currentColor"/>
+            <path d="M3 3v2c8.284 0 15 6.716 15 15h2c0-9.389-7.611-17-17-17z" fill="currentColor"/>
+            <path d="M3 9v2c4.963 0 9 4.037 9 9h2c0-6.065-4.935-11-11-11z" fill="currentColor"/>
+          </svg>
+          <span class="visually-hidden">RSS</span>
+        </a>
+      </div>
     </div>
   </div>
 </header>
+
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
+  <ul class="mobile-nav-list">
+    <li><a href={base + "/"} class="mobile-nav-link">Home</a></li>
+    <li><a href={base + "/blog"} class="mobile-nav-link">Blog</a></li>
+    <li><a href={base + "/categories"} class="mobile-nav-link">Categories</a></li>
+    <li><a href={base + "/about"} class="mobile-nav-link">About</a></li>
+  </ul>
+</nav>
 
 <div class="search-overlay" id="search-overlay">
   <div class="search-container">
@@ -56,6 +76,48 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
 </div>
 
 <script>
+  // Hamburger menu functionality
+  function initHamburgerMenu() {
+    const hamburgerToggle = document.getElementById('hamburger-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const body = document.body;
+
+    if (!hamburgerToggle || !mobileMenu) return;
+
+    hamburgerToggle.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.contains('active');
+      
+      if (isOpen) {
+        mobileMenu.classList.remove('active');
+        hamburgerToggle.setAttribute('aria-expanded', 'false');
+        body.style.overflow = '';
+      } else {
+        mobileMenu.classList.add('active');
+        hamburgerToggle.setAttribute('aria-expanded', 'true');
+        body.style.overflow = 'hidden';
+      }
+    });
+
+    // Close menu when clicking on a link
+    const mobileNavLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        hamburgerToggle.setAttribute('aria-expanded', 'false');
+        body.style.overflow = '';
+      });
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        hamburgerToggle.setAttribute('aria-expanded', 'false');
+        body.style.overflow = '';
+      }
+    });
+  }
+
   // Search functionality
   let searchData = [];
   let searchOverlay, searchInput, searchResults;
@@ -160,13 +222,17 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
   }
 
   // Initialize when DOM is loaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSearch);
-  } else {
+  function init() {
+    initHamburgerMenu();
     initSearch();
   }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 </script>
-</header>
 
 <style>
   .site-header {
@@ -463,69 +529,117 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
     border: 0;
   }
 
+  /* Mobile controls - hidden by default */
+  .mobile-controls {
+    display: none !important;
+    align-items: center;
+    gap: calc(var(--grid-unit) * 2);
+  }
+
+  .hamburger-toggle,
+  .rss-toggle {
+    background: none;
+    border: none;
+    color: var(--color-text-primary);
+    padding: calc(var(--grid-unit));
+    cursor: pointer;
+    transition: color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hamburger-toggle:hover,
+  .hamburger-toggle:focus,
+  .rss-toggle:hover,
+  .rss-toggle:focus {
+    color: var(--color-accent);
+    outline: none;
+  }
+
+  /* Mobile menu - hidden by default */
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--color-background);
+    z-index: 99;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    padding-top: calc(var(--grid-unit) * 12);
+  }
+
+  .mobile-menu.active {
+    transform: translateX(0);
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: calc(var(--grid-unit) * 4) 0;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: calc(var(--grid-unit) * 3) calc(var(--grid-unit) * 4);
+    font-family: var(--font-heading-secondary);
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border);
+    transition: all 0.2s ease;
+  }
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link:focus {
+    color: var(--color-accent);
+    background-color: var(--color-surface);
+  }
+
   @media (max-width: 768px) {
     .header-content {
-      flex-direction: column;
-      align-items: stretch; /* Allow children to stretch full width */
-      gap: calc(var(--grid-unit) * 1.5);
-      /* Remove horizontal padding on mobile to allow precise control */
-      padding-left: 0;
-      padding-right: 0;
-    }
-
-    .site-title {
-      width: 100%;
-      /* Center the SVG in the viewport */
-      text-align: center;
-      padding: 0 var(--content-padding);
-    }
-
-    .site-title a {
-      display: inline-block; /* Use inline-block to respect the SVG's natural width */
-    }
-
-    .title-svg {
-      display: block;
-      height: 40px;
-      width: auto;
-      max-width: 100%;
-      border: none !important; /* Override global img styles */
-      margin: 0 auto !important; /* Center the SVG */
-    }
-    
-    .header-controls {
-      width: 100%; /* Ensure controls take full width */
-      justify-content: space-between; /* Space between nav and search */
-      /* Add padding to align with site title */
-      padding-left: var(--content-padding);
-      padding-right: var(--content-padding);
-      gap: calc(var(--grid-unit) * 2); /* Ensure proper spacing between nav and search */
-    }
-    
-    .search-toggle {
-      /* Increase padding to prevent cutoff */
-      padding: calc(var(--grid-unit)) calc(var(--grid-unit) * 1.5);
-      margin-right: calc(var(--grid-unit) * -1); /* Compensate for extra padding */
-    }
-
-    .main-navigation {
-      /* Remove any default spacing */
-      margin: 0;
-      padding: 0;
-    }
-
-    .nav-list {
+      flex-direction: row; /* Keep horizontal layout for mobile */
+      align-items: center;
+      justify-content: space-between;
       gap: calc(var(--grid-unit) * 2);
     }
 
-    .nav-link {
-      font-size: 0.9rem;
-      padding: calc(var(--grid-unit) / 2) calc(var(--grid-unit)); /* 4px vertical, 8px horizontal */
+    .site-title {
+      flex-shrink: 0;
+    }
+
+    .site-title a {
+      display: block;
+    }
+
+    .title-svg {
+      height: 40px;
+      width: auto;
+      max-width: 200px;
     }
     
-    /* Special handling for first nav link to align text with SVG */
-    .nav-list li:first-child .nav-link {
-      padding-left: 0; /* Remove left padding from first nav item */
+    .header-controls {
+      justify-content: flex-end;
+    }
+    
+    /* Hide desktop navigation on mobile */
+    .main-navigation {
+      display: none;
+    }
+    
+    /* Show mobile controls */
+    .mobile-controls {
+      display: flex !important;
+    }
+    
+    .search-toggle {
+      padding: calc(var(--grid-unit));
     }
 
     .search-container {
