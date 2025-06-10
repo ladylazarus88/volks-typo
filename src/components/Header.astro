@@ -291,7 +291,7 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
     border-radius: 8px;
     border: 1px solid var(--color-border);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 0 calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 2);
+    padding: calc(var(--grid-unit) * 3) calc(var(--grid-unit) * 4) calc(var(--grid-unit) * 4) calc(var(--grid-unit) * 4);
   }
 
   .search-results:empty {
@@ -299,8 +299,8 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
   }
 
   .search-results-header {
-    padding: calc(var(--grid-unit) * 3) calc(var(--grid-unit) * 2);
-    margin: calc(var(--grid-unit) * -2) calc(var(--grid-unit) * -2) calc(var(--grid-unit) * 2) calc(var(--grid-unit) * -2);
+    padding: calc(var(--grid-unit) * 3) calc(var(--grid-unit) * 4);
+    margin: calc(var(--grid-unit) * -3) calc(var(--grid-unit) * -4) calc(var(--grid-unit) * 3) calc(var(--grid-unit) * -4);
     border-bottom: 1px solid var(--color-border);
     background: var(--color-surface);
     position: sticky;
@@ -461,12 +461,12 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
     }
 
     .search-results {
-      padding: 0 calc(var(--grid-unit) * 1.5) calc(var(--grid-unit) * 1.5) calc(var(--grid-unit) * 1.5);
+      padding: calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 2.5) calc(var(--grid-unit) * 3) calc(var(--grid-unit) * 2.5);
     }
     
     .search-results-header {
-      padding: calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 1.5);
-      margin: calc(var(--grid-unit) * -1.5) calc(var(--grid-unit) * -1.5) calc(var(--grid-unit) * 1.5) calc(var(--grid-unit) * -1.5);
+      padding: calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 2.5);
+      margin: calc(var(--grid-unit) * -2) calc(var(--grid-unit) * -2.5) calc(var(--grid-unit) * 2) calc(var(--grid-unit) * -2.5);
     }
     
     .search-result-categories {
