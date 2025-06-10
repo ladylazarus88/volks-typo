@@ -155,12 +155,35 @@ const base = import.meta.env.BASE_URL;
     margin-bottom: calc(var(--grid-unit) * 6);
   }
 
+  .post-content :global(h1) {
+    font-family: var(--font-heading-primary);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-top: calc(var(--grid-unit) * 6);
+    margin-bottom: calc(var(--grid-unit) * 3);
+  }
+
   .post-content :global(h2) {
+    font-family: var(--font-heading-secondary);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
     margin-top: calc(var(--grid-unit) * 6);
     margin-bottom: calc(var(--grid-unit) * 3);
   }
 
   .post-content :global(h3) {
+    font-family: var(--font-heading-secondary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     margin-top: calc(var(--grid-unit) * 4);
     margin-bottom: calc(var(--grid-unit) * 2);
   }
@@ -170,18 +193,45 @@ const base = import.meta.env.BASE_URL;
   }
 
   .post-content :global(blockquote) {
-    border-left: 4px solid var(--color-border);
+    border-left: 4px solid var(--color-accent);
     padding: calc(var(--grid-unit) * 2) calc(var(--grid-unit) * 3);
     margin: calc(var(--grid-unit) * 4) 0;
     background-color: var(--color-surface);
     font-style: italic;
     font-size: 1.1rem;
+    color: var(--color-text-secondary);
   }
 
   .post-content :global(img) {
     border: 2px solid var(--color-border);
     margin: calc(var(--grid-unit) * 4) 0;
     border-radius: 4px;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-bottom: calc(var(--grid-unit) * 3);
+    padding-left: calc(var(--grid-unit) * 3);
+  }
+
+  .post-content :global(li) {
+    margin-bottom: calc(var(--grid-unit) / 2);
+  }
+
+  .post-content :global(strong) {
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+
+  .post-content :global(em) {
+    font-style: italic;
+  }
+
+  .post-content :global(hr) {
+    height: 2px;
+    background-color: var(--color-border);
+    border: none;
+    margin: calc(var(--grid-unit) * 4) 0;
   }
 
   .post-footer {
