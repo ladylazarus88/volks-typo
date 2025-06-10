@@ -6,6 +6,15 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
 
 <header class="site-header">
   <div class="header-content">
+    <!-- Mobile hamburger button - far left on mobile -->
+    <button class="hamburger-toggle mobile-only" id="hamburger-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="hamburger-line" d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path class="hamburger-line" d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path class="hamburger-line" d="M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    
     <div class="site-title">
       <a href={base + "/"}>
         <img src={base + "/site-title.svg"} alt={config.title} class="title-svg" />
@@ -22,22 +31,8 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
         </ul>
       </nav>
       
+      <!-- Mobile controls group - RSS and Search on right -->
       <div class="mobile-controls">
-        <button class="hamburger-toggle" id="hamburger-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path class="hamburger-line" d="M3 6h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path class="hamburger-line" d="M3 12h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path class="hamburger-line" d="M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-        
-        <button class="search-toggle" id="search-toggle" aria-label="Search articles">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
-            <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </button>
-        
         <a href={base + "/rss.xml"} class="rss-toggle" title="RSS Feed">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <circle cx="5" cy="19" r="2" fill="currentColor"/>
@@ -46,6 +41,13 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
           </svg>
           <span class="visually-hidden">RSS</span>
         </a>
+        
+        <button class="search-toggle" id="search-toggle" aria-label="Search articles">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"/>
+            <path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
       </div>
     </div>
   </div>
@@ -536,6 +538,11 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
     gap: calc(var(--grid-unit) * 2);
   }
 
+  /* Hide mobile-only hamburger by default */
+  .mobile-only {
+    display: none !important;
+  }
+
   .hamburger-toggle,
   .rss-toggle {
     background: none;
@@ -603,29 +610,42 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
   }
 
   @media (max-width: 768px) {
+    .site-header {
+      padding: calc(var(--grid-unit) * 2) 0;
+    }
+
     .header-content {
-      flex-direction: row; /* Keep horizontal layout for mobile */
+      display: grid;
+      grid-template-columns: auto 1fr auto;
       align-items: center;
-      justify-content: space-between;
       gap: calc(var(--grid-unit) * 2);
+      padding: 0 calc(var(--grid-unit) * 2);
+    }
+
+    /* Show mobile hamburger on far left */
+    .mobile-only {
+      display: flex !important;
+      margin-left: calc(var(--grid-unit) * -1); /* Push to edge */
     }
 
     .site-title {
-      flex-shrink: 0;
+      justify-self: center;
+      text-align: center;
     }
 
     .site-title a {
-      display: block;
+      display: inline-block;
     }
 
     .title-svg {
-      height: 40px;
+      height: 36px;
       width: auto;
-      max-width: 200px;
+      max-width: 180px;
     }
     
     .header-controls {
-      justify-content: flex-end;
+      justify-self: end;
+      gap: 0;
     }
     
     /* Hide desktop navigation on mobile */
@@ -633,13 +653,17 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
       display: none;
     }
     
-    /* Show mobile controls */
+    /* Show mobile controls on right */
     .mobile-controls {
       display: flex !important;
+      gap: calc(var(--grid-unit) * 1.5);
+      margin-right: calc(var(--grid-unit) * -1); /* Push to edge */
     }
     
+    .hamburger-toggle,
+    .rss-toggle,
     .search-toggle {
-      padding: calc(var(--grid-unit));
+      padding: calc(var(--grid-unit) * 0.75);
     }
 
     .search-container {
