@@ -472,10 +472,20 @@ const { base = '' } = Astro.site ? { base: import.meta.env.BASE_URL } : { base: 
       width: 100%;
       display: flex;
       justify-content: center;
+      align-items: center;
+    }
+
+    .site-title a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
     }
 
     .title-svg {
+      display: block;
       margin: 0 auto;
+      height: 40px;
     }
 
     .nav-list {
